@@ -1,8 +1,8 @@
 const express = require('express');
+const hbs = require('hbs');
 
-// we really don't need mongoose and hbs in this project
+// we really don't need mongoose in this project
 // const mongoose = require('mongoose');
-// const hbs = require('hbs');
 
 const app =express();
 
