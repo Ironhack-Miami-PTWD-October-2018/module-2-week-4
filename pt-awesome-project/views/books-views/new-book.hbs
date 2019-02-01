@@ -1,0 +1,32 @@
+<h1>Create a new book</h1>
+
+<form action="/books/create" method="post">
+
+  <label for="">Title</label>
+  <input type="text" name="theTitle" id="">
+
+  <label for="">Author</label>
+  <select name="theAuthor" id="">
+    {{#each authorsFromDB}}
+    {{!-- value="{{this._id}} => because we need the author's id to be saved
+    in the books collection since we referenced the author's model by its id in the book model:
+      author: { type: Schema.Types.ObjectId, ref: "Author" },
+  --}}
+  
+      <option value="{{this._id}}">{{this.firstName}} {{ this.lastName }}</option>
+    {{/each}}
+
+  </select>
+
+  <label for="">Description:</label>
+  <input type="text" name="theDescription" id="">
+
+  <label for="">Rating</label>
+  <input type="number" name="theRating" id="" placeholder="1">
+
+  <label for="">Image URL:</label>
+  <input type="text" name="theImage" id="">
+
+  <button type="submit">Save the book</button>
+
+</form>

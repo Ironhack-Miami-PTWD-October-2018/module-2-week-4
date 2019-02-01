@@ -1,0 +1,12 @@
+<ul>
+
+  {{#each authors}}
+    <li>
+      <h2>{{this.firstName}} {{this.lastName}}</h2>
+      <h3>Born: {{ this.birthday }}</h3>
+      <h3>Nationality: {{ this.nationality }}</h3>
+      <img src="{{this.image_url}}" alt="" width="200">
+    </li>
+  {{/each}}
+</ul>
+

@@ -62,7 +62,13 @@ const index = require('./routes/index');
 app.use('/', index);
 
 const authorRoutes = require('./routes/author-routes');
-app.use('/', authorRoutes);
+app.use('/', authorRoutes); // => here we don't prefix so we have to repeat '/authors' all the time
+
+// const bookRoutes = require('./routes/book-routes');
+// app.use('/books', bookRoutes);
+app.use('/books', require('./routes/book-routes')); // => this way is the same as the way above, it's just saving a couple of key strokes
+
+//this one we prefix every route with /books so we dont have to keep repeating it over and over
 
 
 module.exports = app;

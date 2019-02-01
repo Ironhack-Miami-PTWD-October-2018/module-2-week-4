@@ -1,0 +1,15 @@
+<h1>{{book.title}}</h1>
+<h2>Written by: {{book.author.firstName}} {{book.author.lastName}}</h2>
+<p>Description: {{book.description}}</p>
+<p>Rating: {{book.rating}}</p>
+{{#if book.image_url}}
+<img src="{{book.image_url}}" alt="" width="200">
+{{else}}
+<p>The book doesn't have cover image.</p>
+{{/if}}
+<br>
+<form action="/books/{{book._id}}" method="post">
+  <button type="submit">Delete this book</button>
+</form>
+<br>
+<a href="/books">Go back</a>
