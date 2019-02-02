@@ -1,0 +1,31 @@
+<h1>Edit a book</h1>
+
+<form action="/books/{{book._id}}/update" method="post">
+
+  <label for="">Title</label>
+  <input type="text" name="theTitle" id="" value="{{book.title}}">
+
+  <label for="">Author</label>
+  <select name="theAuthor" id="">
+    {{#each authors}}
+      {{#if this.isWriter}}
+        <option value="{{this._id}}" selected="selected">{{this.firstName}} {{ this.lastName }}</option>
+      {{else}}
+        <option value="{{this._id}}">{{this.firstName}} {{ this.lastName }}</option>
+      {{/if}}
+    {{/each}}
+
+  </select>
+
+  <label for="">Description:</label>
+  <input type="text" name="theDescription" id="" value="{{book.description}}">
+
+  <label for="">Rating</label>
+  <input type="number" name="theRating" id="" placeholder="1" value="{{book.rating}}">
+
+  {{!-- <label for="">Image URL:</label>
+  <input type="text" name="theImage" id=""> --}}
+
+  <button type="submit">Save changes</button>
+
+</form>

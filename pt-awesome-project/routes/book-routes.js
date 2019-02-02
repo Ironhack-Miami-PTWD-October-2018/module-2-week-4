@@ -54,10 +54,50 @@ router.post('/:theBookId', (req, res, next) => {
     res.redirect('/books');
   })
   .catch( err => console.log("Error while deleting the book: ", err) );
-
 })
 
+// GET route for edit the book
+router.get('/:id/edit', (req, res, next) => {
+  Book.findById(req.params.id)
+  .then( foundBook => {
+    // console.log("Found book author ID is ", foundBook.author);
+    // get all the authors from the db and pass it to the view:
+    Author.find()
+    .then( allAuthors => {
+      allAuthors.forEach(theAuthor => {
+        // console.log('ID: ', theAuthor._id);
+        // create additional key in the author object to differentiate the author that wrote this book 
+        // from all the other authors
+        if(theAuthor._id.equals(foundBook.author)){
+          theAuthor.isWriter = true;
+        }
+      })
+      res.render('books-views/edit-book', { book: foundBook, authors: allAuthors });
+    } )
+    .catch(err => console.log('Error while getting the authors from the DB', err));
+  } )
+  .catch(err => console.log('Error while getting the details for book edit: ', err));
+})
 
+// post route to send the changes in the book to db
+
+{/* <form action="/books/{{book._id}}/update" method="post"> */}
+
+router.post('/:theBookId/update', (req, res, next) => {
+  // console.log("Updates are: ", req.body);
+  Book.findByIdAndUpdate(req.params.theBookId, {
+    title: req.body.theTitle,
+    description: req.body.theDescription,
+    author: req.body.theAuthor,
+    rating: req.body.theRating
+  })
+  .then( updatedBook => {
+    // console.log("Is this updated: ", updatedBook);
+    // res.redirect(`/books/${updatedBook._id}`);
+    res.redirect(`/books/${req.params.theBookId}`);
+  } )
+  .catch(err => console.log('Error while saving the updates in the db: ', err));
+})
 
 // get the details of a book from the DB
 // http://localhost:3000/books/5c52542abbd9c887b58e24a7 <== this 'id' will change dynamically when we click on each book
