@@ -16,8 +16,8 @@ const bookSchema = new Schema({
   timestamps: true
 })
 
-// we create Author class based on these previously defined rules
+// we create Book class based on these previously defined rules
 const Book = mongoose.model("Book", bookSchema );
 
-// export Author class to make it available in other files
+// export Book class to make it available in other files
 module.exports = Book;
